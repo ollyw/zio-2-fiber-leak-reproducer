@@ -1,5 +1,6 @@
 # Fiber leak reproducer
 
+This app has been created to report a bug on cats-interop github https://github.com/zio/interop-cats/issues/640
 ## Background
 Since migrating some projects to ZIO 2.0.x there have been a few issues with managed heap space running out. Some improvements in recent ZIO 2.0.x versions have improved it (migration from fiber root nursery), but there still seems at least one underlying issue. The most recent issue was triggered with a Cats-Effect upgrade from 3.3.x to 3.4.x.. When trying to reproduce, a small part of the app behaviour was simulated in this reproducer. It is unclear if it is the root cause in the app, but certainly this reproducer is not behaving as expected.
 
