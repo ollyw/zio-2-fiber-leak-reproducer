@@ -12,7 +12,7 @@ object Main extends ZIOAppDefault {
       client <- ZIO.service[Client[Task]]
       result <- client.expect[String]("https://zio.dev/")
 //      _ = println(result)
-    } yield ()).repeat(Schedule.fixed(2.seconds))
+    } yield ()).repeat(Schedule.fixed(1.seconds))
 
   private def fiberMetricsWorker =
     (for {
@@ -29,10 +29,10 @@ object Main extends ZIOAppDefault {
         ZIO.debug(
           s"Total roots $total. Fibers running: ${statues._1}, suspended: ${statues._2}, done: ${statues._3}"
         )
-//            sampledRoots = roots.take(20)
-//            _ <- ZIO.foreachDiscard(sampledRoots)(f =>
-//                   f.dump.flatMap(dump => ZIO.when(dump.status.isSuspended)(dump.prettyPrint.flatMap(ZIO.debug(_))))
-//                 )
+//        sampledRoots = roots//.take(10)
+//        _ <- ZIO.foreachDiscard(sampledRoots)(f =>
+//               f.dump.flatMap(dump => ZIO.when(dump.status.isSuspended)(dump.prettyPrint.flatMap(ZIO.debug(_))))
+//             )
     } yield ()).repeat(Schedule.fixed(5.seconds)).fork
 
 
